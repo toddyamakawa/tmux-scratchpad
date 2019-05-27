@@ -15,7 +15,7 @@ function tmux-print() {
 # Parse args
 cmd="$@"
 if [[ -z $cmd ]]; then
-	tmux display-message "cmd not specified"
+	tmux display-message 'scratchpad: command missing'
 	exit
 fi
 cmd=$(eval tmux-print "$@")
