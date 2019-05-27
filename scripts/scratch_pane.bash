@@ -18,7 +18,7 @@ if [[ -z $cmd ]]; then
 	tmux display-message 'scratchpad: command missing'
 	exit
 fi
-cmd=$(eval tmux-print "$@")
+cmd=$(eval tmux-print "'$@'")
 
 # Get pane information
 # TODO: Get scroll position
@@ -36,7 +36,7 @@ scratch_name="[scratch-$pane_id]"
 read -r scratch_window_id scratch_pane_id <<<$(
 	eval tmux new-window -P -d -n "'$scratch_name'" \
 		-F '"#{window_id} #{pane_id}"' \
-		$cmd
+		"'$cmd'"
 )
 
 # Ensure window gets killed on exit
