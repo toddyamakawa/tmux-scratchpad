@@ -41,11 +41,11 @@ read -r scratch_window_id scratch_pane_id <<<$(
 		"'$cmd'"
 )
 
+# Swap in new pane
+tmux swap-pane -s $pane_id -t $scratch_pane_id
+
 # Close tmux pane on exit
 tmux set-window-option -t "$scratch_pane_id" remain-on-exit on
 tmux set-hook -t "$scratch_pane_id" pane-died \
 	"swap-pane -s $pane_id -t $scratch_pane_id ; kill-pane -t $scratch_pane_id"
-
-# Swap in new pane
-tmux swap-pane -s $pane_id -t $scratch_pane_id
 
